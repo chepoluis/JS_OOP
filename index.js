@@ -8,7 +8,7 @@ const circle = {
         y: 1
     },
     draw: function() { // <-- Method
-        console.log('Draw');
+        // console.log('Draw');
     }
 };
 
@@ -19,7 +19,7 @@ function createCircle(radius = 0) {
     return {
         radius,
         draw: function() {
-            console.log('Draw')
+            // console.log('Draw')
         }
     }
 }
@@ -30,7 +30,7 @@ const newCircle = createCircle(2);
 function Circle(radius) {
     this.radius = radius;
     this.draw = function() {
-        console.log('draw');
+        // console.log('draw');
     }
 }
 
@@ -75,7 +75,7 @@ let x = {};
 function Circle(radius) { // <-- this function was created with Function
     this.radius = radius;
     this.draw = function() {
-        console.log('draw');
+        // console.log('draw');
     }
 }
 
@@ -94,8 +94,56 @@ Circle.apply({}, [1, 2, 3]); // Is exactly like the "call" method, but the argum
 const Circle1 = new Function('radius', `
 this.radius = radius;
 this.draw = function() {
-    console.log('draw');
+    // console.log('draw');
 }
 `);
 
 const c = new Circle1(1);
+
+// To know if a property exists in an object we can use "in"
+
+if ('radius' in circle)
+    // console.log('circle has a radius property');
+
+// Private Properties and Methods
+function Circle2(radius) {
+    this.radius = radius; // Public
+
+    let defaultLocation = { x: 0, y: 0 }; // Private members of the circle object
+
+    let computeOptimumLocation = function(factor) {
+        //...
+    }
+
+    /**
+     * This a clouse, can access to the variables by the outer function
+     */
+    this.draw = function() { 
+        /**
+         * This variables are temporary, will die after the functions ends
+         * and every time this function is call, will be created again
+         */
+        let x, y; // Ignore
+        
+        computeOptimumLocation(0.1);
+        
+        console.log('draw');
+    }
+
+    // Define get and set for defaultLocation
+    Object.defineProperty(this, 'defaultLocation', {
+        get: function() {
+            return defaultLocation;
+        },
+        set: function(value) {
+            if (!value.x || !value.y)
+                throw new Error('Invalid location');
+
+            defaultLocation = value;
+        }
+    });
+}
+
+const circle2 = new Circle2(10);
+circle2.defaultLocation = { x: 1, y: 1 };
+circle2.draw(); 
