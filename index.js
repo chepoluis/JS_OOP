@@ -116,7 +116,7 @@ function Circle2(radius) {
     }
 
     /**
-     * This a clouse, can access to the variables by the outer function
+     * This a clouser, can access to the variables by the outer function
      */
     this.draw = function() { 
         /**
