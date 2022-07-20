@@ -33,6 +33,14 @@ function Circle(radius, color) {
 
 extend(Circle, Shape);
 
+// Overriding duplicate functions, you need to call it after extending the circle because at this point we are reseting the prototype
+Circle.prototype.duplicate = function() {
+    Shape.prototype.duplicate.call(this);
+
+    console.log('Duplicate cricle');
+}
+
+
 Circle.prototype.draw = function() {
     console.log('Draw');
 }
