@@ -37,7 +37,7 @@ extend(Circle, Shape);
 Circle.prototype.duplicate = function() {
     Shape.prototype.duplicate.call(this);
 
-    console.log('Duplicate cricle');
+    console.log('Duplicate circle');
 }
 
 
@@ -50,6 +50,19 @@ function Square(size) {
 }
 
 extend(Square, Shape);
+
+// This is polymorphism, because Circle has the same method with a different behavior
+Square.prototype.duplicate = function() {
+    console.log('duplicate square');
+}
+
+const shapes = [
+    new Circle(),
+    new Square()
+]
+
+for (let shape of shapes)
+    shape.duplicate() // Call the corresponding method for every shape
 
 const s = new Shape();
 const c = new Circle(1, 'blue');
