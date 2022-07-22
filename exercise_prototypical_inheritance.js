@@ -29,7 +29,7 @@ function HtmlSelectElement(elements = []) {
  * 
  * This is not gonna work becuase, Object.create will create a new object,
  * and set the prototype of that object, that's why click function is not in the 
- * HtmlSelectElement and just exists the focus method
+ * HtmlSelectElement object and just exists the focus method in the prototype
  * 
  */
 
