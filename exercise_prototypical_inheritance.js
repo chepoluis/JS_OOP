@@ -22,6 +22,14 @@ function HtmlSelectElement(elements = []) {
 
         this.items.splice(indexItem, 1);
     }
+
+    this.render = function() {
+        return `
+<select>${this.items.map(item => `
+    <option>${item}</option>`).join('')}
+</select>
+        `;
+    }
 }
 
 /**
@@ -35,8 +43,31 @@ function HtmlSelectElement(elements = []) {
 
 HtmlSelectElement.prototype = new HtmlElement();
 HtmlSelectElement.prototype.constructor = HtmlSelectElement; // It's similar to new HtmlSelectElement()
+
+// HtmlSelectElement.prototype.render = function() {
+    // HtmlElement.prototype.render.call(this);
+    // let options = '';
+
+    // this.items.forEach((val) => {
+    //     options += `  <option>${val}</option>\n`;
+    // })
+    // console.log(options)
+
+    // console.log(`<select>\n ${options}</select>`);
+// }
  
 const he = new HtmlElement();
-const e = new HtmlSelectElement();
+const e = new HtmlSelectElement([1,2,3,4]);
 
 console.log(e)
+
+function HtmlImageElement(src) {
+    this.src = src;
+
+    this.render = function() {
+        return `<img src="${this.src}" />`;
+    }
+}
+
+HtmlImageElement.prototype = new HtmlElement();
+HtmlImageElement.prototype.constructor = HtmlImageElement;
