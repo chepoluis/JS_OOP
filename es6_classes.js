@@ -100,3 +100,21 @@ class Circle3 {
 const c3 = new Circle3(3);
 c3.draw()
 
+// ------------------------
+// Method overriding
+
+class Shape {
+    move() {
+        console.log('move');
+    }
+}
+
+class Circle extends Shape {
+    // Method overriding
+    move() {
+        super.move();
+
+        console.log('circle move');
+    }
+}
+
